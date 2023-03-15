@@ -1,7 +1,8 @@
 # install biopython in python packages
 from Bio import SeqIO
 
-#fasta files, 5012 ITS from rozello, 984 ITS from glomero
+#download fasta files for Rozellomycota (https://doi.plutof.ut.ee/doi/10.15156/BIO/TH005184) and Glomeromycota (https://doi.plutof.ut.ee/doi/10.15156/BIO/TH005180)
+#save fasta files to python, 5012 ITS from rozello, 984 ITS from glomero
 fasta_rozello = "rozello.fasta"
 fasta_glomero = "glomero.fasta"
 
