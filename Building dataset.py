@@ -30,6 +30,5 @@ for record in SeqIO.parse(fasta_glomero, "fasta"):
     count_glomero += 1
 
 #create training and test fasta files
-print(training_set[1])
 SeqIO.write(training_set, "training_set.fasta", "fasta-2line")
 SeqIO.write(test_set, "test_set.fasta", "fasta-2line")
