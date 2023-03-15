@@ -6,7 +6,7 @@ fasta_rozello = "rozello.fasta"
 fasta_glomero = "glomero.fasta"
 
 #training dataset = 100 sequences of each
-#test dataset = 700 sequences of each
+#test dataset = 600 sequences of each
 training_set = []
 test_set = []
 count_rozello = 0
