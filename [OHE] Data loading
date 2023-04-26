@@ -1,0 +1,45 @@
+# Import Modules
+import torch
+from torch import nn
+import numpy as np
+import torch.nn.init
+import torch.optim as optim
+from torch.utils.data import Dataset, DataLoader
+
+# Data Loading
+class my_precious_dataset(Dataset):
+    def __init__(self, file_loc_label_list):
+        self.sequences = []
+        self.labels = []
+
+        # Read each file and its label
+        for item in file_loc_label_list:
+            file_loc = item[0]
+            label = item[1]
+            # Load the file and generate the label
+            current_seqs = np.load(file_loc)
+            current_labels = [label] * len(current_seqs)
+            # Add the current list to the big seq list
+            self.sequences.extend(current_seqs)
+            self.labels.extend(current_labels)
+
+        # self.sequences = self.sequences, dtype=torch.float32)
+        # self.labels = torch.tensor(self.labels, dtype=torch.float32)
+        self.length = len(self.sequences)
+
+    def __getitem__(self, idx):
+        seqs = torch.tensor(self.sequences[idx], dtype=torch.float32)
+        labels = torch.tensor(self.labels[idx])
+        return seqs, labels
+
+    def __len__(self):
+        return self.length
+
+my_train_dataset = my_precious_dataset([('training_asco_encoded.npy', 0), ('training_basi_encoded.npy', 1)])
+trainloader = DataLoader(my_train_dataset, batch_size=64, shuffle=True)
+
+my_val_dataset = my_precious_dataset([('validation_asco_encoded.npy', 0), ('validation_basi_encoded.npy', 1)])
+valloader = DataLoader(my_val_dataset, batch_size=64, shuffle=True)
+
+my_test_dataset = my_precious_dataset([('testing_asco_encoded.npy', 0), ('testing_basi_encoded.npy', 1)])
+testloader = DataLoader(my_test_dataset, batch_size=64, shuffle=True)
